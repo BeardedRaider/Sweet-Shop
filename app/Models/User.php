@@ -51,6 +51,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
+    public function hasRole($roleName)
+    {
+        return $this->roles->contains('name', $roleName);
+    }
+
         // Define one-to-many relationship with Review model
     public function reviews()
     {

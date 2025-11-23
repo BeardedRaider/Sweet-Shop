@@ -15,39 +15,45 @@
         {{-- Navigation links: flex container with spacing and hover transitions --}}
         <nav class="flex gap-6 text-sm font-medium text-pink-700">
             
-            {{-- Public links: always visible to guests and logged-in users --}}
-            <a href="{{ route('products.index') }}" class="hover:text-pink-500 transition">Products</a>
-            <a href="{{ route('reviews.index') }}" class="hover:text-pink-500 transition">Reviews</a>
-            <a href="{{ route('contact') }}" class="hover:text-pink-500 transition">Contact</a>
-
-            {{-- Guest-only link: shown when no user is logged in --}}
+            {{-- Public links: only for guests --}}
             @guest
+                <a href="{{ route('home') }}" class="hover:text-pink-500 transition">Home</a>
+                <a href="{{ route('products.index') }}" class="hover:text-pink-500 transition">Products</a>
+                <a href="{{ route('reviews.index') }}" class="hover:text-pink-500 transition">Reviews</a>
+                <a href="{{ route('contact') }}" class="hover:text-pink-500 transition">Contact</a>
                 <a href="{{ route('login') }}" class="hover:text-pink-500 transition font-semibold">Login</a>
             @endguest
 
-            {{-- Authenticated user links: shown when a user is logged in --}}
+            {{-- Authenticated users --}}
             @auth
-                <a href="{{ route('account') }}" class="hover:text-pink-500 transition">Account</a>
-
-                {{-- Checkout link with cart icon --}}
-                <a href="{{ route('checkout') }}" class="hover:text-pink-500 transition flex items-center gap-1">
-                    🛒 <span>Checkout</span>
-                </a>
-
-                {{-- Logout form --}}
-                <form action="{{ route('logout') }}" method="POST" class="inline">
-                    @csrf
-                    <button type="submit" class="hover:text-pink-500 transition">Logout</button>
-                </form>
+                {{-- Admin users --}}
+                @if(Auth::user()->role === 'admin')
+                    <a href="{{ route('home') }}" class="hover:text-pink-500 transition">Home</a>
+                    <a href="{{ route('admin.products.index') }}" class="hover:text-pink-500 transition">Manage Products</a>
+                    <a href="{{ route('admin.reviews.index') }}" class="hover:text-pink-500 transition">Manage Reviews</a>
+                    <a href="{{ route('admin.users.index') }}" class="hover:text-pink-500 transition">Manage Users</a>
+                    <a href="{{ route('account') }}" class="hover:text-pink-500 transition">Account</a>
+                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="hover:text-pink-500 transition">Logout</button>
+                    </form>
+                @else
+                    {{-- Regular users --}}
+                    <a href="{{ route('home') }}" class="hover:text-pink-500 transition">Home</a>
+                    <a href="{{ route('products.index') }}" class="hover:text-pink-500 transition">Products</a>
+                    <a href="{{ route('reviews.index') }}" class="hover:text-pink-500 transition">Reviews</a>
+                    <a href="{{ route('contact') }}" class="hover:text-pink-500 transition">Contact</a>
+                    <a href="{{ route('account') }}" class="hover:text-pink-500 transition">Account</a>
+                    <a href="{{ route('checkout') }}" class="hover:text-pink-500 transition flex items-center gap-1">
+                        🛒 <span>Checkout</span>
+                    </a>
+                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="hover:text-pink-500 transition">Logout</button>
+                    </form>
+                @endif
             @endauth
 
-            {{-- Admin-only links: shown if logged-in user has role "admin" --}}
-            @if(Auth::check() && Auth::user()->role === 'admin')
-                <a href="{{ route('admin.dashboard') }}" class="hover:text-pink-500 transition">Admin</a>
-                <a href="{{ route('admin.products.index') }}" class="hover:text-pink-500 transition">Manage Products</a>
-                <a href="{{ route('admin.users.index') }}" class="hover:text-pink-500 transition">Manage Users</a>
-                <a href="{{ route('admin.reviews.index') }}" class="hover:text-pink-500 transition">Manage Reviews</a>
-            @endif
         </nav>
     </div>
 </header>

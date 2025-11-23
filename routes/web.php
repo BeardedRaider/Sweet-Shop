@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\UserReviewController;
 
 
 /*
@@ -35,7 +36,7 @@ Web Routes
             'product' => $product
         ]);
     })->name('products.show');
-    Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
+    Route::get('/reviews', [UserReviewController::class, 'index'])->name('reviews.index');    
     Route::view('/contact', 'stub')->name('contact');
 
     // Account page for logged in users

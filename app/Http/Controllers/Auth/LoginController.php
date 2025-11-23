@@ -24,11 +24,11 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             // Redirect based on role
-            if (Auth::user()->role === 'admin') {
+            if (Auth::user()->hasRole('admin')) {
                 return redirect()->route('admin.dashboard');
             }
 
-            return redirect()->route('home');
+            return redirect()->route('products.index');
         }
 
         return back()->withErrors([
