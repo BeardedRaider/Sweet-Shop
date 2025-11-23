@@ -18,26 +18,36 @@
 
             {{-- Always visible: Home link, highlights when on home route --}}
             <a href="{{ route('home') }}" 
-               class="{{ request()->routeIs('home') ? 'text-pink-600 font-bold border-b-2 border-pink-600' : 'hover:text-pink-500 transition' }}">
+               class="{{ request()->routeIs('home') 
+                   ? 'text-pink-600 font-bold border-b-2 border-pink-600 transition-all duration-300' 
+                   : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300' }}">
                Home
             </a>
 
             {{-- Guest-only links (visible when no user is logged in) --}}
             @guest
                 <a href="{{ route('products.index') }}" 
-                   class="{{ request()->routeIs('products.index') ? 'text-pink-600 font-bold border-b-2 border-pink-600' : 'hover:text-pink-500 transition' }}">
+                   class="{{ request()->routeIs('products.index') 
+                       ? 'text-pink-600 font-bold border-b-2 border-pink-600 transition-all duration-300' 
+                       : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300' }}">
                    Products
                 </a>
                 <a href="{{ route('reviews.index') }}" 
-                   class="{{ request()->routeIs('reviews.index') ? 'text-pink-600 font-bold border-b-2 border-pink-600' : 'hover:text-pink-500 transition' }}">
+                   class="{{ request()->routeIs('reviews.index') 
+                       ? 'text-pink-600 font-bold border-b-2 border-pink-600 transition-all duration-300' 
+                       : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300' }}">
                    Reviews
                 </a>
                 <a href="{{ route('contact') }}" 
-                   class="{{ request()->routeIs('contact') ? 'text-pink-600 font-bold border-b-2 border-pink-600' : 'hover:text-pink-500 transition' }}">
+                   class="{{ request()->routeIs('contact') 
+                       ? 'text-pink-600 font-bold border-b-2 border-pink-600 transition-all duration-300' 
+                       : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300' }}">
                    Contact
                 </a>
                 <a href="{{ route('login') }}" 
-                   class="{{ request()->routeIs('login') ? 'text-pink-600 font-bold border-b-2 border-pink-600' : 'hover:text-pink-500 transition font-semibold' }}">
+                   class="{{ request()->routeIs('login') 
+                       ? 'text-pink-600 font-bold border-b-2 border-pink-600 transition-all duration-300 font-semibold' 
+                       : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300 font-semibold' }}">
                    Login
                 </a>
             @endguest
@@ -47,57 +57,85 @@
                 {{-- Admin-only links --}}
                 @if(Auth::user()->hasRole('admin'))
                     <a href="{{ route('admin.dashboard') }}" 
-                       class="{{ request()->routeIs('admin.dashboard') ? 'text-pink-600 font-bold border-b-2 border-pink-600' : 'hover:text-pink-500 transition' }}">
+                       class="{{ request()->routeIs('admin.dashboard') 
+                           ? 'text-pink-600 font-bold border-b-2 border-pink-600 transition-all duration-300' 
+                           : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300' }}">
                        Admin Dashboard
                     </a>
                     <a href="{{ route('admin.products.index') }}" 
-                       class="{{ request()->routeIs('admin.products.*') ? 'text-pink-600 font-bold border-b-2 border-pink-600' : 'hover:text-pink-500 transition' }}">
+                       class="{{ request()->routeIs('admin.products.*') 
+                           ? 'text-pink-600 font-bold border-b-2 border-pink-600 transition-all duration-300' 
+                           : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300' }}">
                        Manage Products
                     </a>
                     <a href="{{ route('admin.reviews.index') }}" 
-                       class="{{ request()->routeIs('admin.reviews.*') ? 'text-pink-600 font-bold border-b-2 border-pink-600' : 'hover:text-pink-500 transition' }}">
+                       class="{{ request()->routeIs('admin.reviews.*') 
+                           ? 'text-pink-600 font-bold border-b-2 border-pink-600 transition-all duration-300' 
+                           : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300' }}">
                        Manage Reviews
                     </a>
                     <a href="{{ route('admin.users.index') }}" 
-                       class="{{ request()->routeIs('admin.users.*') ? 'text-pink-600 font-bold border-b-2 border-pink-600' : 'hover:text-pink-500 transition' }}">
+                       class="{{ request()->routeIs('admin.users.*') 
+                           ? 'text-pink-600 font-bold border-b-2 border-pink-600 transition-all duration-300' 
+                           : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300' }}">
                        Manage Users
                     </a>
-                    <a href="{{ route('account') }}" 
-                       class="{{ request()->routeIs('account') ? 'text-pink-600 font-bold border-b-2 border-pink-600' : 'hover:text-pink-500 transition' }}">
-                       Account
-                    </a>
-                    <form action="{{ route('logout') }}" method="POST" class="inline">
-                        @csrf
-                        <button type="submit" class="hover:text-pink-500 transition">Logout</button>
-                    </form>
                 @else
                     {{-- Regular user links --}}
                     <a href="{{ route('products.index') }}" 
-                       class="{{ request()->routeIs('products.index') ? 'text-pink-600 font-bold border-b-2 border-pink-600' : 'hover:text-pink-500 transition' }}">
+                       class="{{ request()->routeIs('products.index') 
+                           ? 'text-pink-600 font-bold border-b-2 border-pink-600 transition-all duration-300' 
+                           : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300' }}">
                        Products
                     </a>
                     <a href="{{ route('reviews.index') }}" 
-                       class="{{ request()->routeIs('reviews.index') ? 'text-pink-600 font-bold border-b-2 border-pink-600' : 'hover:text-pink-500 transition' }}">
+                       class="{{ request()->routeIs('reviews.index') 
+                           ? 'text-pink-600 font-bold border-b-2 border-pink-600 transition-all duration-300' 
+                           : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300' }}">
                        Reviews
                     </a>
                     <a href="{{ route('contact') }}" 
-                       class="{{ request()->routeIs('contact') ? 'text-pink-600 font-bold border-b-2 border-pink-600' : 'hover:text-pink-500 transition' }}">
+                       class="{{ request()->routeIs('contact') 
+                           ? 'text-pink-600 font-bold border-b-2 border-pink-600 transition-all duration-300' 
+                           : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300' }}">
                        Contact
                     </a>
-                    <a href="{{ route('account') }}" 
-                       class="{{ request()->routeIs('account') ? 'text-pink-600 font-bold border-b-2 border-pink-600' : 'hover:text-pink-500 transition' }}">
-                       Account
-                    </a>
                     <a href="{{ route('checkout') }}" 
-                       class="{{ request()->routeIs('checkout') ? 'text-pink-600 font-bold border-b-2 border-pink-600 flex items-center gap-1' : 'hover:text-pink-500 transition flex items-center gap-1' }}">
+                       class="{{ request()->routeIs('checkout') 
+                           ? 'text-pink-600 font-bold border-b-2 border-pink-600 transition-all duration-300 flex items-center gap-1' 
+                           : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300 flex items-center gap-1' }}">
                        🛒 <span>Checkout</span>
                     </a>
-                    <form action="{{ route('logout') }}" method="POST" class="inline">
-                        @csrf
-                        <button type="submit" class="hover:text-pink-500 transition">Logout</button>
-                    </form>
                 @endif
+
+                {{-- Account link with role badge --}}
+                <span class="flex items-center gap-2">
+                    <a href="{{ route('account') }}" 
+                       class="{{ request()->routeIs('account') 
+                           ? 'text-pink-600 font-bold border-b-2 border-pink-600 transition-all duration-300' 
+                           : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300' }}">
+                       {{ Auth::user()->name }}
+                    </a>
+
+                    {{-- Role badge: shows Admin or Customer --}}
+                    @if(Auth::user()->hasRole('admin'))
+                        <span class="px-2 py-0.5 text-xs font-bold rounded bg-red-100 text-red-700 border border-red-300">
+                            Admin
+                        </span>
+                    @elseif(Auth::user()->hasRole('customer'))
+                        <span class="px-2 py-0.5 text-xs font-bold rounded bg-blue-100 text-blue-700 border border-blue-300">
+                            Customer
+                        </span>
+                    @endif
+                </span>
+
+                {{-- Logout button --}}
+                <form action="{{ route('logout') }}" method="POST" class="inline">
+                    @csrf
+                    <button type="submit" class="hover:text-pink-500 transition">Logout</button>
+                </form>
             @endauth
         </nav>
     </div>
 </header>
+
