@@ -43,5 +43,5 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
     //Flash message instead of forcing home redirect
-    return redirect()->back()->with('success', 'You have been logged out successfully.');    }
+    return redirect()->route('login')->with('success', 'You have been logged out successfully.');    }
 }
