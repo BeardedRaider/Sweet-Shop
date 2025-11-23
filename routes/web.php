@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 
+
 /*
 Web Routes
 */
@@ -18,13 +19,17 @@ Web Routes
     Route::post('/login', [LoginController::class, 'login']);
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+
+
 // Public routes
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    
     Route::get('/products', function () {
         return view('products.index', [
             'products' => Product::all()
         ]);
     })->name('products.index');
+
     Route::get('/products/{product}', function (Product $product) {
         return view('products.show', [
             'product' => $product
@@ -32,6 +37,15 @@ Web Routes
     })->name('products.show');
     Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
     Route::view('/contact', 'stub')->name('contact');
+
+    // Account page for logged in users
+    Route::get('/account', function () {
+        return view('account.index');
+    })->name('account');
+    // Checkout page for logged in users
+    Route::get('/checkout', function () {
+        return view('checkout.index');
+    })->name('checkout');
 
 
 // Admin routes
