@@ -35,19 +35,28 @@ class AccountController extends Controller
     }
 
     // Optional: show order history
-    public function orders()
+    public function orders(Request $request)
     {
-        $orders = Auth::user()->orders()->latest()->get();
+        $query = Auth::user()->orders()->latest();
+
+        // Optional filtering by status
+        if ($request->has('status') && $request->status !== 'all') {
+            $query->where('status', $request->status);
+        }
+
+        // Paginate results (10 per page)
+        $orders = $query->paginate(10);
+
         return view('account.orders', compact('orders'));
     }
 
     public function showOrder(Order $order)
     {
-        // Ensure the order belongs to the logged-in user
         if ($order->user_id !== Auth::id()) {
             abort(403);
         }
 
+        $order->load('items.product'); // ensures items + product are available
         return view('account.order-show', compact('order'));
     }
 }
