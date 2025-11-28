@@ -56,7 +56,11 @@ class AccountController extends Controller
             abort(403);
         }
 
-        $order->load('items.product'); // ensures items + product are available
+    // Load products and their reviews by this user
+        $order->load(['items.product.reviews' => function ($query) {
+            $query->where('user_id', Auth::id());
+        }]);
+
         return view('account.order-show', compact('order'));
     }
 }
