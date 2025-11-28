@@ -82,4 +82,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Review::class);
     }
+
+    /**
+     * Relationship: one-to-many with Order model.
+     * A user can have multiple orders.
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
