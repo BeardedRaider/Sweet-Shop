@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserReviewController;
 
 
@@ -51,8 +51,11 @@ Web Routes
 
 // Admin routes
     Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::resource('products', ProductController::class);
-    Route::resource('users', UserController::class);
-    Route::resource('reviews', ReviewController::class);
+        Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+        Route::resource('products', ProductController::class);
+        Route::resource('users', UserController::class);
+        Route::resource('reviews', ReviewController::class);
+        
+        Route::delete('products/images/{image}', [ProductController::class, 'deleteImage'])
+        ->name('products.images.destroy');
 });
