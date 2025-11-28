@@ -4,7 +4,7 @@
     <section class="text-center mt-10 bg-pink-100 rounded-lg py-10 px-4 shadow-sm">
         <h1 class="text-4xl font-bold text-pink-700">Welcome to SweetShop</h1>
         <p class="mt-4 text-lg text-pink-900">
-            Scotland’s first Asian pastry shop — discover our delicious sweets, browse reviews, and manage your orders.
+            Scotland’s first Artisan sweet shop — discover our delicious sweets, browse reviews, and manage your orders.
         </p>
 
         <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
@@ -23,7 +23,7 @@
     <section class="mt-12 bg-pink-50 py-8 px-6 rounded-lg shadow-sm text-center">
         <h2 class="text-2xl font-bold text-pink-700">Our Story</h2>
         <p class="mt-4 text-pink-900 max-w-xl mx-auto">
-            Born in Paisley, SweetShop brings authentic Asian pastries to Scotland. 
+            Born in Paisley, SweetShop brings authentic Artisan sweets to Scotland. 
             We blend tradition with creativity to make every bite memorable.
         </p>
     </section>
