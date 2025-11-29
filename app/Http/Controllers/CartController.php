@@ -7,25 +7,18 @@ use App\Models\Product;
 
 class CartController extends Controller
 {
-    public function add(Request $request, Product $product)
-    {
-        $quantity = max(1, (int) $request->input('quantity', 1));
+public function add(Request $request, Product $product)
+{
+    $quantity = max(1, (int) $request->input('quantity', 1));
 
-        // Store cart in session for simplicity
-        $cart = session()->get('cart', []);
+    // Cart stored as product_id => quantity
+    $cart = session()->get('cart', []);
 
-        if (isset($cart[$product->id])) {
-            $cart[$product->id]['quantity'] += $quantity;
-        } else {
-            $cart[$product->id] = [
-                'name' => $product->name,
-                'price' => $product->price,
-                'quantity' => $quantity,
-            ];
-        }
+    $cart[$product->id] = ($cart[$product->id] ?? 0) + $quantity;
 
-        session()->put('cart', $cart);
+    session()->put('cart', $cart);
 
-        return redirect()->back()->with('success', "{$product->name} added to cart!");
-    }
+    return redirect()->back()->with('success', "{$product->name} added to cart!");
+}
+
 }
