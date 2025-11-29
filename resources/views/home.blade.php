@@ -19,21 +19,32 @@
         </div>
     </section>
 
-    {{-- About Us --}}
-    <section class="mt-12 bg-pink-50 py-8 px-6 rounded-lg shadow-sm text-center">
-        <h2 class="text-2xl font-bold text-pink-700">Our Story</h2>
-        <p class="mt-4 text-pink-900 max-w-xl mx-auto">
-            Born in Paisley, SweetShop brings authentic Artisan sweets to Scotland. 
-            We blend tradition with creativity to make every bite memorable.
-        </p>
+{{-- Our Story --}}
+    <section class="mt-12 mb-10 bg-pink-50 rounded-lg shadow">
+        <div class="p-6 max-w-6xl mx-auto flex flex-col lg:flex-row gap-6">
+
+            {{-- Left: text --}}
+            <div class="flex-1 text-left">
+            <h2 class="text-2xl font-bold text-pink-700 mb-4">Our Story</h2>
+            <p class="text-pink-900 text-sm leading-relaxed mb-4">
+                Born in Paisley, SweetShop brings authentic Artisan sweets to Scotland.
+                We blend tradition with creativity to make every bite memorable.
+            </p>
+            <p class="text-pink-900 text-sm leading-relaxed">
+                Today, SweetShop is proud to serve customers across Renfrewshire and beyond,
+                blending heritage with creativity in every bite.
+            </p>
+            </div>
+
+        </div>
     </section>
 
         {{-- Featured Sweets --}}
         @if (!empty($products ?? []))
             <section class="mt-12">
-                <h2 class="text-xl font-semibold text-center text-pink-700 mb-6">Featured Sweets of the Week</h2>
+                <h2 class="text-2xl font-bold text-center text-pink-700 mb-6">Featured sweets of the week</h2>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 cols-4-1080 gap-6 justify-items-center">
                     @foreach ($products as $product)
                         @include('products.card', ['product' => $product])
                     @endforeach
@@ -41,7 +52,7 @@
 
                 <div class="text-center mt-6">
                     <a href="{{ route('products.index') }}"
-                    class="bg-pink-500 text-white px-6 py-2 rounded-full hover:bg-pink-600 transition">
+                    class="bg-pink-600 hover:bg-pink-700 text-white px-5 py-2 rounded-full text-sm transition">
                         View all
                     </a>
                 </div>
@@ -52,11 +63,12 @@
         @if (!empty($reviews ?? []))
             <section class="mt-12 bg-pink-50 py-8 px-4 rounded-lg shadow-sm">
                 <h2 class="text-xl font-semibold text-center text-pink-700 mb-6">What our customers say</h2>
-                <div class="space-y-4 max-w-2xl mx-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 cols-4-1080 gap-6 justify-items-center">
                     @foreach ($reviews as $review)
                         @include('reviews.item', ['review' => $review])
                     @endforeach
                 </div>
+
             </section>
         @endif
 
