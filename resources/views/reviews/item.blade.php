@@ -24,8 +24,9 @@
 
     {{-- Star rating --}}
     <div>
-        Rating: {{ $review->rating }}
-        <br>
+        {{-- {{-- Testing the raiting display --}}
+        {{-- Rating: {{ $review->rating }}
+        <br> --}}
         Stars:
         @for ($i = 1; $i <= 5; $i++)
             @if ($i <= (int) $review->rating)
