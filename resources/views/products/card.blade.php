@@ -20,4 +20,51 @@
 
     {{-- Product price --}}
     <p class="mt-2 font-bold text-pink-600">£{{ number_format($product->price, 2) }}</p>
+
+@auth
+  <form action="{{ route('cart.add', $product->id) }}" method="POST"
+        class="mt-6 flex flex-col items-center gap-4 px-4 py-4 bg-pink-50 rounded-lg shadow-inner">
+    @csrf
+
+<div class="flex items-center gap-4">
+  {{-- - button --}}
+  <button type="button"
+          class="px-3 py-1 bg-pink-500 text-white rounded-full shadow hover:bg-pink-600 transition cursor-pointer"
+          onclick="
+            const hidden = this.nextElementSibling.nextElementSibling;
+            const display = this.nextElementSibling;
+            let val = Math.max(1, parseInt(hidden.value) - 1);
+            hidden.value = val;
+            display.textContent = val;
+          ">−</button>
+
+  {{-- Counter display (fixed-size, centered, non-resizable) --}}
+  <span class="flex-none w-12 h-12 grid place-items-center bg-white border border-pink-300 rounded font-semibold text-pink-800 text-sm tabular-nums select-none overflow-hidden">
+    1
+  </span>
+  <input type="hidden" name="quantity" value="1" />
+
+
+  {{-- + button --}}
+  <button type="button"
+          class="px-3 py-1 bg-pink-500 text-white rounded-full shadow hover:bg-pink-600 transition cursor-pointer"
+          onclick="
+            const hidden = this.previousElementSibling;
+            const display = hidden.previousElementSibling;
+            let val = parseInt(hidden.value) + 1;
+            hidden.value = val;
+            display.textContent = val;
+          ">+</button>
 </div>
+
+
+    {{-- Add to Cart button (your exact styling) --}}
+    <button type="submit"
+            class="w-full px-6 py-3 bg-pink-500 text-white rounded-full shadow hover:bg-pink-600 transition">
+      Add to Cart
+    </button>
+  </form>
+@endauth
+
+</div>
+

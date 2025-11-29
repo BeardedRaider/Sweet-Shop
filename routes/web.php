@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserReviewController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CartController;
 
 /*
 Web Routes
@@ -50,6 +51,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/account/orders/{order}', [AccountController::class, 'showOrder'])->name('account.orders.show');
     Route::get('/reviews/create/{order}', [UserReviewController::class, 'create'])->name('reviews.create');
     Route::post('/reviews', [UserReviewController::class, 'store'])->name('reviews.store');
+    Route::post('/cart/add/{product}', [CartController::class, 'add'])
+    ->name('cart.add');
 });
 
 // Admin routes

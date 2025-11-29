@@ -6,12 +6,11 @@
         <h1 class="text-3xl font-bold text-center text-pink-700 mb-6">All Our Sweets</h1>
 
         @if ($products->count())
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 cols-4-1080 gap-6 justify-items-center">
-    @foreach ($products as $product)
-        @include('products.card', ['product' => $product])
-    @endforeach
-</div>
-
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 cols-4-1080 gap-6 justify-items-center">
+                @foreach ($products as $product)
+                    @include('products.card', ['product' => $product])
+                @endforeach
+            </div>
         @else
             <p class="text-center text-pink-900">No products available at the moment.</p>
         @endif
