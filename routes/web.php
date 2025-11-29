@@ -47,13 +47,20 @@ Route::get('/checkout', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/account', [AccountController::class, 'index'])->name('account');
     Route::put('/account', [AccountController::class, 'update'])->name('account.update');
+
     Route::get('/account/orders', [AccountController::class, 'orders'])->name('account.orders');
+
     Route::get('/account/orders/{order}', [AccountController::class, 'showOrder'])->name('account.orders.show');
+
     Route::get('/reviews/create/{order}', [UserReviewController::class, 'create'])->name('reviews.create');
+
     Route::post('/reviews', [UserReviewController::class, 'store'])->name('reviews.store');
+
     Route::post('/cart/add/{product}', [CartController::class, 'add'])
     ->name('cart.add');
+
     Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+    Route::post('/checkout', [CartController::class, 'placeOrder'])->name('checkout.place');
 });
 
 // Admin routes

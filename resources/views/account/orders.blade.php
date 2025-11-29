@@ -10,6 +10,9 @@
                     <tr class="bg-pink-100 text-pink-700">
                         <th class="px-4 py-2 text-left">Order #</th>
                         <th class="px-4 py-2 text-left">Date</th>
+                        <th class="px-4 py-2 text-left">Name</th>
+                        <th class="px-4 py-2 text-left">Address</th>
+                        <th class="px-4 py-2 text-left">Payment Method</th>
                         <th class="px-4 py-2 text-left">Total</th>
                         <th class="px-4 py-2 text-left">Status</th>
                         <th class="px-4 py-2 text-left">Actions</th>
@@ -20,6 +23,9 @@
                         <tr>
                             <td class="border px-4 py-2">{{ $order->id }}</td>
                             <td class="border px-4 py-2">{{ $order->created_at->format('d M Y') }}</td>
+                            <td class="border px-4 py-2">{{ $order->name }}</td>
+                            <td class="border px-4 py-2">{{ $order->address }}</td>
+                            <td class="border px-4 py-2">{{ ucfirst($order->method) }}</td>
                             <td class="border px-4 py-2">£{{ number_format($order->total, 2) }}</td>
                             <td class="border px-4 py-2">
                                 <span class="

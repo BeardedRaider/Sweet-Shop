@@ -1,7 +1,18 @@
 <x-layout :title="'Checkout'">
     <section class="max-w-2xl mx-auto bg-white shadow rounded p-6 mt-10">
         <h1 class="text-2xl font-bold text-pink-700 mb-6">Checkout</h1>
+            {{-- Flash messages --}}
+            @if(session('success'))
+                <div class="bg-green-100 text-green-800 p-4 rounded mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
 
+            @if(session('error'))
+                <div class="bg-red-100 text-red-800 p-4 rounded mb-4">
+                    {{ session('error') }}
+                </div>
+            @endif
         {{-- Cart summary --}}
         <div class="mb-6">
             <h2 class="text-lg font-semibold mb-2">Your Cart</h2>
@@ -53,30 +64,30 @@
         {{-- Billing/shipping form --}}
         <div class="mb-6">
             <h2 class="text-lg font-semibold mb-2">Billing Details</h2>
-            <form>
-                {{-- Name field --}}
+            <form action="{{ route('checkout.place') }}" method="POST">
+                @csrf
+                {{-- Name --}}
                 <div class="mb-4">
                     <label class="block text-pink-700">Name</label>
-                    <input type="text" class="w-full border rounded px-3 py-2" placeholder="Your Name">
+                    <input type="text" name="name" class="w-full border rounded px-3 py-2" required>
                 </div>
 
-                {{-- Address field --}}
+                {{-- Address --}}
                 <div class="mb-4">
                     <label class="block text-pink-700">Address</label>
-                    <input type="text" class="w-full border rounded px-3 py-2" placeholder="Street Address">
+                    <input type="text" name="address" class="w-full border rounded px-3 py-2" required>
                 </div>
 
-                {{-- Payment method dropdown --}}
+                {{-- Payment method --}}
                 <div class="mb-4">
                     <label class="block text-pink-700">Payment Method</label>
-                    <select class="w-full border rounded px-3 py-2">
-                        <option>Credit Card</option>
-                        <option>PayPal</option>
-                        <option>Gift Card</option>
+                    <select name="payment_method" class="w-full border rounded px-3 py-2" required>
+                        <option value="card">Credit Card</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="gift">Gift Card</option>
                     </select>
                 </div>
 
-                {{-- Submit button --}}
                 <button type="submit" class="w-full bg-pink-500 text-white py-2 rounded hover:bg-pink-600">
                     Place Order
                 </button>
