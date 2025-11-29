@@ -32,7 +32,7 @@
 
     {{-- Main content container: centers content and applies consistent padding.
          $slot is where child views render their page-specific markup. --}}
-    <main class="max-w-7xl mx-auto px-4 py-6">
+    <main class="mx-auto px-4 py-6 max-w-none">
         {{ $slot }}
     </main>
 

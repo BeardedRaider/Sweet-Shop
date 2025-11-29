@@ -215,6 +215,13 @@
   }
 }
 @layer utilities {
+    /* Custom utility: 4-column grid at 1080px
+         Added to extend Tailwind’s defaults for coursework clarity.
+         This ensures the layout scales progressively:
+         - 1 col <640px
+         - 2 cols ≥640px
+         - 3 cols ≥768px
+         - 4 cols ≥1080px (custom) */
   .visible {
     visibility: visible;
   }
@@ -617,6 +624,12 @@
     @media (width >= 48rem) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
+  }
+  /* This media query adds a custom grid column layout for screens 1080px and wider */
+  @media (min-width: 1080px) {
+      .cols-4-1080 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
   }
 }
 @property --tw-space-y-reverse {
