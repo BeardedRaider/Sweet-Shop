@@ -18,14 +18,24 @@
         <p class="text-xs font-medium text-gray-800 mb-1">"{{ $review->title }}"</p>
     @endif
 
+    {{-- used to debug rating type --}}
+    {{-- 
+    <p class="text-xs text-red-500">Rating: {{ $review->rating }} ({{ gettype($review->rating) }})</p> --}}
+
     {{-- Star rating --}}
-    @if(!empty($review->rating))
-        <div class="flex justify-center mb-1 text-yellow-500 text-xs">
-            @for ($i = 1; $i <= 5; $i++)
-                <span class="{{ $i <= $review->rating ? '' : 'text-gray-300' }}">★</span>
-            @endfor
-        </div>
-    @endif
+    <div>
+        Rating: {{ $review->rating }}
+        <br>
+        Stars:
+        @for ($i = 1; $i <= 5; $i++)
+            @if ($i <= (int) $review->rating)
+                ★
+            @else
+                ☆
+            @endif
+        @endfor
+    </div>
+
 
     {{-- Review body --}}
     <p class="text-gray-700 italic text-xs">“{{ $review->body }}”</p>
