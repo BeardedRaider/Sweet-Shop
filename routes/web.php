@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/reviews', [UserReviewController::class, 'store'])->name('reviews.store');
     Route::post('/cart/add/{product}', [CartController::class, 'add'])
     ->name('cart.add');
+    Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
 });
 
 // Admin routes
