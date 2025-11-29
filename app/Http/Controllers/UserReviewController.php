@@ -12,11 +12,26 @@ class UserReviewController extends Controller
     /**
      * Show all reviews (optional, for /reviews route).
      */
-    public function index()
+    public function index(Request $request)
     {
-        $reviews = Review::with('user', 'product')->latest()->paginate(10);
+        $query = Review::with('user', 'product');
+
+        // Filter by rating if provided
+        if ($request->filled('rating')) {
+            $query->where('rating', $request->rating);
+        }
+
+        // Filter by product if provided
+        if ($request->filled('product_id')) {
+            $query->where('product_id', $request->product_id);
+        }
+
+        // Paginate and keep query string so filters persist
+        $reviews = $query->latest()->paginate(10)->withQueryString();
+
         return view('reviews.index', compact('reviews'));
     }
+
 
     /**
      * Show the "create review" form for a given order.
