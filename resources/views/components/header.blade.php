@@ -16,13 +16,26 @@
         {{-- Navigation links: flex container with spacing and hover transitions --}}
         <nav class="flex gap-6 text-sm font-medium text-pink-700">
 
-            {{-- Always visible: Home link, highlights when on home route --}}
-            <a href="{{ route('home') }}" 
-               class="{{ request()->routeIs('home') 
-                   ? 'text-pink-600 font-bold border-b-2 border-pink-600 transition-all duration-300' 
-                   : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300' }}">
-               Home
-            </a>
+            {{-- Home link: show for guests and non-admin users only --}}
+            @guest
+                <a href="{{ route('home') }}" 
+                   class="{{ request()->routeIs('home') 
+                       ? 'text-pink-600 font-bold border-b-2 border-pink-600 transition-all duration-300' 
+                       : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300' }}">
+                   Home
+                </a>
+            @endguest
+
+            @auth
+                @unless(Auth::user()->hasRole('admin'))
+                    <a href="{{ route('home') }}" 
+                       class="{{ request()->routeIs('home') 
+                           ? 'text-pink-600 font-bold border-b-2 border-pink-600 transition-all duration-300' 
+                           : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300' }}">
+                       Home
+                    </a>
+                @endunless
+            @endauth
 
             {{-- Guest-only links (visible when no user is logged in) --}}
             @guest
@@ -80,6 +93,12 @@
                            : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300' }}">
                        Manage Users
                     </a>
+                    <a href="{{ route('admin.orders.index') }}" 
+                       class="{{ request()->routeIs('admin.orders.*') 
+                           ? 'text-pink-600 font-bold border-b-2 border-pink-600 transition-all duration-300' 
+                           : 'hover:text-pink-500 hover:border-b-2 hover:border-pink-500 transition-all duration-300' }}">
+                       Manage Orders
+                    </a>
                 @else
                     {{-- Regular user links --}}
                     <a href="{{ route('products.index') }}" 
@@ -117,7 +136,7 @@
                        {{ Auth::user()->name }}
                     </a>
 
-                    {{-- Role badge: shows Admin or Customer --}}
+                    {{-- Role badge --}}
                     @if(Auth::user()->hasRole('admin'))
                         <span class="px-2 py-0.5 text-xs font-bold rounded bg-red-100 text-red-700 border border-red-300">
                             Admin
@@ -139,4 +158,3 @@
     </div>
     <script src="//unpkg.com/alpinejs" defer></script>
 </header>
-
