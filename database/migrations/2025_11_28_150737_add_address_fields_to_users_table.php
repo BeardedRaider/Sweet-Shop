@@ -11,6 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Add optional address fields to users to support shipping/billing
+        // information. All fields are nullable to avoid breaking existing
+        // users who have not provided these details.
         Schema::table('users', function (Blueprint $table) {
             $table->string('address_line1')->nullable();
             $table->string('address_line2')->nullable();

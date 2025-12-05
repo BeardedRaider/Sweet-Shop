@@ -11,9 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Roles table stores named roles that can be attached to users
+        // (e.g. 'admin', 'customer'). A many-to-many pivot table links
+        // users to roles, allowing users to have multiple roles.
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
+
+            // Role name identifier
             $table->string('name'); // 'admin', 'customer'
+
             $table->timestamps();
         });
     }
