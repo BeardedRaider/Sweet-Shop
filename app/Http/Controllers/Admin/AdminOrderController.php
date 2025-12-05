@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 class AdminOrderController extends Controller
 {
     /**
+     * Admin order management controller.
+     *
+     * Provides listing and detail views for all orders and allows admins
+     * to update order status. Methods assume admin-level authorization
+     * is enforced via middleware or gate checks elsewhere.
+     */
+    /**
      * Display a listing of all orders.
      * Admins can see every order, regardless of user.
      */

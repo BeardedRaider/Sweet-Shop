@@ -10,6 +10,12 @@ use App\Models\Review;
 class UserReviewController extends Controller
 {
     /**
+     * User-facing review controller.
+     *
+     * Lets users view reviews, create reviews for orders they own,
+     * and submit them. Includes filters for rating and product.
+     */
+    /**
      * Show all reviews (optional, for /reviews route).
      */
     public function index(Request $request)

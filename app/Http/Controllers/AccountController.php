@@ -9,6 +9,12 @@ use App\Models\Order;
 
 class AccountController extends Controller
 {
+    /**
+     * User account controller.
+     *
+     * Displays account pages, handles profile updates and shows order
+     * history/details for the authenticated user.
+     */
     // Show the account page
     public function index()
     {

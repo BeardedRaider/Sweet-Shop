@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
+    /**
+     * Admin review moderation controller.
+     *
+     * Allows administrators to view, edit and delete user reviews. Actions
+     * typically appear in an admin UI and should be protected by admin-only
+     * middleware.
+     */
     public function index()
     {
         // Load reviews with their related user and product

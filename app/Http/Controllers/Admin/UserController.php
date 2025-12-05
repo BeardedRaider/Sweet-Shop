@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    /**
+     * Admin user management controller.
+     *
+     * Manage users from the admin area: list users, edit basic details,
+     * and delete accounts. Role management is intentionally handled
+     * elsewhere to reduce accidental privilege changes.
+     */
     public function index()
     {
         // Eager load roles so each user has their roles available

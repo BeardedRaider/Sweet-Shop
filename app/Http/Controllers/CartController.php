@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
+    /**
+     * Shopping cart controller.
+     *
+     * Manages an in-session shopping cart, checkout display and order placement.
+     * Cart contents are stored in the session as an array of product_id => quantity.
+     */
     // Add product to cart
     public function add(Request $request, Product $product)
     {

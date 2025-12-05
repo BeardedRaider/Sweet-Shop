@@ -8,6 +8,13 @@ use App\Models\Image;
 
 class ProductController extends Controller
 {
+    /**
+     * Public product controller.
+     *
+     * Handles listing, creating and updating products for the public/admin
+     * sections where appropriate. Methods use Eloquent models and simple
+     * validation; image uploads are stored to the `public` disk.
+     */
     // Show all products
     public function index()
     {

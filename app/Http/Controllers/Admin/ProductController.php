@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Log; // Import Log facade for logging
 
 class ProductController extends Controller
 {
+    /**
+     * Admin product controller.
+     *
+     * CRUD operations for products in the admin area, including image upload
+     * handling and related logging. Only accessible to authorized admin users.
+     */
     // Show all products in admin index
     public function index()
     {
