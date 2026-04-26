@@ -10,6 +10,11 @@ use App\Models\Product;
 // Auth controller: handles login/logout actions
 use App\Http\Controllers\Auth\LoginController;
 
+// Registration controller: handles user registration (not always included in basic auth scaffolding)
+use App\Http\Controllers\Auth\RegisterController;
+Route::post('/register', [RegisterController::class, 'store'])->name('register');
+
+
 // Admin controllers: dashboard and resource management (products, users, reviews, orders)
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProductController;
