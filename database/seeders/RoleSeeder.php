@@ -13,6 +13,8 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
+        // Create basic roles used by the application. These are referenced
+        // when assigning roles to users (see `UserSeeder`).
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'customer']);
     }

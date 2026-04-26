@@ -26,6 +26,9 @@ class ProductSeeder extends Seeder
             ['Bubblegum Balls', 'Classic bubblegum flavour.', 1.59, 120],
         ];
 
+        // Insert a set of sample products used for development and testing.
+        // These are simple fixtures — in larger projects you might use
+        // factories to generate more diverse data.
         foreach ($products as [$name, $desc, $price, $stock]) {
             Product::create([
                 'name' => $name,

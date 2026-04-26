@@ -26,6 +26,8 @@ class ProductImageSeeder extends Seeder
             [10, 'bubblegum-balls.jpg', 'Bubblegum Balls'],
         ];
 
+        // Insert a set of example image records that map product IDs to
+        // image files. These are simple fixtures for development and tests.
         foreach ($images as [$productId, $filename, $alt]) {
             Image::create([
                 'product_id' => $productId,

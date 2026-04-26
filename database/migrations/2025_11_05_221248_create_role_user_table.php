@@ -11,11 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-     Schema::create('role_user', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('role_id')->constrained()->onDelete('cascade');
-        $table->foreignId('user_id')->constrained()->onDelete('cascade');
-    });
+        // Pivot table connecting users and roles (many-to-many relationship).
+        // Each row assigns a role to a user. Using cascade deletes keeps
+        // assignments clean when a user or role is removed.
+        Schema::create('role_user', function (Blueprint $table) {
+            $table->id();
+
+            // Reference to the role
+            $table->foreignId('role_id')->constrained()->onDelete('cascade');
+
+            // Reference to the user
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+        });
     }
 
     /**
