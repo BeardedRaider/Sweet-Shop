@@ -13,9 +13,15 @@ class ReviewFactory extends Factory
 
     public function definition(): array
     {
+        // Ensure at least one user exists
+        $user = User::inRandomOrder()->first() ?? User::factory()->create();
+
+        // Ensure at least one product exists
+        $product = Product::inRandomOrder()->first() ?? Product::factory()->create();
+
         return [
-            'user_id' => User::inRandomOrder()->first()->id ?? User::factory(),
-            'product_id' => Product::inRandomOrder()->first()->id ?? Product::factory(),
+            'user_id' => $user->id,
+            'product_id' => $product->id,
             'body' => $this->faker->sentence(12),
             'rating' => $this->faker->numberBetween(1, 5),
         ];
