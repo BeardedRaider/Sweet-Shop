@@ -24,10 +24,10 @@
     {{-- Flash message component: displays session-based notifications --}}
     <x-flash />
 
-    {{-- Main content container: centers content and applies consistent padding.
-         $slot is where child views render their page-specific markup. --}}
-    <main class="mx-auto px-4 py-6 max-w-none">
-        {{ $slot }}
+    <main class="px-4 py-6 flex justify-center">
+        <div class="w-full max-w-6xl mx-auto">
+            {{ $slot }}
+        </div>
     </main>
 
     {{-- Footer component: site-wide footer and legal links --}}
