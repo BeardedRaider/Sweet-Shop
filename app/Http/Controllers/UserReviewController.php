@@ -9,39 +9,25 @@ use App\Models\Review;
 
 class UserReviewController extends Controller
 {
-    /**
-     * User-facing review controller.
-     *
-     * Lets users view reviews, create reviews for orders they own,
-     * and submit them. Includes filters for rating and product.
-     */
-    /**
-     * Show all reviews (optional, for /reviews route).
-     */
+    // Public reviews list with filters
     public function index(Request $request)
     {
         $query = Review::with('user', 'product');
 
-        // Filter by rating if provided
         if ($request->filled('rating')) {
             $query->where('rating', $request->rating);
         }
 
-        // Filter by product if provided
         if ($request->filled('product_id')) {
             $query->where('product_id', $request->product_id);
         }
 
-        // Paginate and keep query string so filters persist
         $reviews = $query->latest()->paginate(10)->withQueryString();
 
         return view('reviews.index', compact('reviews'));
     }
 
-
-    /**
-     * Show the "create review" form for a given order.
-     */
+    // Show create form for a given order
     public function create(Order $order)
     {
         if ($order->user_id !== Auth::id()) {
@@ -49,12 +35,11 @@ class UserReviewController extends Controller
         }
 
         $order->load('items.product');
+
         return view('reviews.create', compact('order'));
     }
 
-    /**
-     * Store a new review.
-     */
+    // Store a new review
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -64,8 +49,12 @@ class UserReviewController extends Controller
             'rating'     => 'required|integer|min:1|max:5',
         ]);
 
-        // Prevent duplicate reviews per user/product
-        $existing = Auth::user()->reviews()->where('product_id', $validated['product_id'])->first();
+        // One review per user/product
+        $existing = Auth::user()
+            ->reviews()
+            ->where('product_id', $validated['product_id'])
+            ->first();
+
         if ($existing) {
             return back()->withErrors(['body' => 'You have already reviewed this product.']);
         }
@@ -74,8 +63,8 @@ class UserReviewController extends Controller
         $review->user_id = Auth::id();
         $review->save();
 
-        return redirect()->route('account.orders')
-                 ->with('success', 'Review submitted successfully!');
-
+        return redirect()
+            ->route('account.orders')
+            ->with('success', 'Review submitted successfully!');
     }
 }

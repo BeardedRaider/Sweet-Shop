@@ -1,15 +1,15 @@
-<div class="bg-pink-100 rounded-lg shadow-sm p-6 mb-8">
+<div class="bg-pink-100 rounded-lg shadow-sm p-6 mb-8 mt-10">
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
-        {{-- Left: Title --}}
+        {{-- Title --}}
         <h2 class="text-2xl font-bold text-pink-700">
             Browse Our Sweets
         </h2>
 
-        {{-- Right: Search + Sort --}}
+        {{-- Search + Sort --}}
         <div class="flex flex-col sm:flex-row gap-4">
 
-            {{-- Search with auto-suggest (ONE bar, ONE dropdown) --}}
+            {{-- Search --}}
             <form method="GET" action="{{ route('products.index') }}" class="relative">
                 <input 
                     type="text"
@@ -20,10 +20,10 @@
                     @input.debounce.300ms="fetchSuggestions"
                 >
 
-                {{-- Keep current sort when searching --}}
+                {{-- Keep sort when searching --}}
                 <input type="hidden" name="sort" value="{{ request('sort') }}">
 
-                {{-- Auto-suggest dropdown (ONLY ONE) --}}
+                {{-- Suggestions --}}
                 <div 
                     x-show="suggestions.length > 0"
                     class="absolute left-0 right-0 bg-white border border-pink-200 rounded-lg shadow-md mt-1 z-20"
@@ -38,7 +38,7 @@
                 </div>
             </form>
 
-            {{-- Sort Dropdown --}}
+            {{-- Sort --}}
             <form method="GET" action="{{ route('products.index') }}">
                 <select 
                     name="sort"

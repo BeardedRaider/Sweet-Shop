@@ -1,9 +1,25 @@
-{{-- resources/views/index.blade.php --}}
 <x-layout>
-    <div class="w-full flex justify-center mb-8">
+    {{-- Hero --}}
+<section class="text-center mt-10 bg-pink-100 rounded-lg py-10 px-4 shadow-sm">
+    <h1 class="text-4xl font-bold text-pink-700">What Our Customers Say</h1>
+
+    <p class="mt-4 text-lg text-pink-900">
+        Honest thoughts, sweet experiences, and real feedback from candy lovers.
+    </p>
+</section>
+
+<div class="bg-pink-100 rounded-lg shadow-sm p-6 mb-8 mt-10">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+        {{-- Filter Title --}}
+        <h2 class="text-2xl font-bold text-pink-700">
+            Find the Sweetest Reviews
+        </h2>
+
+        {{-- Filters --}}
         <form method="GET" action="{{ route('reviews.index') }}"
-            class="flex items-center gap-4 bg-pink-50 border border-pink-200 px-4 py-3 rounded-full shadow-sm">
-            
+              class="flex flex-col sm:flex-row items-center gap-4">
+
             {{-- Rating --}}
             <select name="rating"
                     class="border border-pink-300 rounded-full px-3 py-1 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-pink-500">
@@ -26,21 +42,24 @@
                 @endforeach
             </select>
 
-            {{-- Filter button --}}
+            {{-- Apply --}}
             <button type="submit"
-                    class="bg-pink-600 hover:bg-pink-700 text-pink-600 font-semibold px-4 py-1.5 rounded-full text-sm transition duration-150 ease-in-out active:scale-95">
-                Apply Filters
+                    class="bg-pink-600 hover:bg-pink-700 text-white font-semibold px-4 py-1.5 rounded-full text-sm transition active:scale-95">
+                Apply
             </button>
 
-            {{-- Clear filters --}}
+            {{-- Clear --}}
             @if(request()->has('rating') || request()->has('product_id'))
                 <a href="{{ route('reviews.index') }}"
-                class="text-sm text-pink-600 underline">
+                   class="text-sm text-pink-600 underline">
                     Clear
                 </a>
             @endif
         </form>
     </div>
+</div>
+
+
 
     <section class="mt-8 px-4">
         <h2 class="text-2xl font-bold mb-6 text-center text-pink-700">Customer Reviews</h2>
@@ -52,7 +71,6 @@
                 @endforeach
             </div>
 
-
             <div class="mt-8">
                 {{ $reviews->links() }}
             </div>
@@ -61,4 +79,3 @@
         @endif
     </section>
 </x-layout>
-
