@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        {{-- Meta tags --}}
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        {{-- Page title --}}
         <title>{{ $title ?? 'SweetShop' }}</title>
 
-        {{-- Stylesheet --}}
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <noscript><link rel="stylesheet" href="/app.css"></noscript>
     </head>
-    <body class="bg-slate-50 text-slate-900">
-
-        {{-- FULL-PAGE FLEX WRAPPER --}}
+    {{-- possible bg color options 
+    Artisan-#FFF8F2 
+    Pale sherbet-#FFFBEA 
+    Bisque-#FFE5B4 
+    Bisque2-#FFE4C4--}}
+    <body class="text-slate-900 bg-[#FFE4C4] ">
         <div class="min-h-screen flex flex-col">
-
             <x-header />
             <x-flash />
 
@@ -27,7 +25,6 @@
             </main>
 
             <x-footer />
-
         </div>
     </body>
 </html>
