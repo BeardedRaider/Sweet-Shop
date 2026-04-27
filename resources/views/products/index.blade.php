@@ -1,47 +1,39 @@
 <x-layout :title="'Browse Our Sweets'">
 
-    {{-- Alpine wrapper for search + sorting --}}
-    <div 
-        x-data="{
-            search: '',
-            sort: '',
-            suggestions: [],
+    {{-- Alpine wrapper MUST wrap the filter component --}}
+    <div x-data="{
+        search: '',
+        suggestions: [],
 
-            fetchSuggestions() {
-                if (this.search.length < 2) {
-                    this.suggestions = [];
-                    return;
-                }
-
-                fetch(`/products/suggest?query=${this.search}`)
-                    .then(res => res.json())
-                    .then(data => this.suggestions = data);
-            },
-
-            selectSuggestion(item) {
-                this.search = item;
+        fetchSuggestions() {
+            if (this.search.length < 2) {
                 this.suggestions = [];
-            },
-
-            applySort() {
-                // We'll wire this up next
+                return;
             }
-        }"
-    >
 
-        {{-- Hero / Intro section --}}
+            fetch(`/products/suggest?q=${this.search}`)
+                .then(res => res.json())
+                .then(data => this.suggestions = data);
+        },
+
+        selectSuggestion(name) {
+            this.search = name;
+            this.suggestions = [];
+        }
+    }">
+
+        {{-- Hero --}}
         <section class="text-center mt-10 bg-pink-100 rounded-lg py-10 px-4 shadow-sm">
             <h1 class="text-4xl font-bold text-pink-700">Step Into the Sweet Aisle</h1>
-
             <p class="mt-4 text-lg text-pink-900">
                 Bright colours, bold flavours, and dangerously snackable treats — explore at your own risk.
             </p>
         </section>
 
-        {{-- Filter Bar Component --}}
+        {{-- 🔥 Your search + sort bar MUST be inside this wrapper --}}
         <x-product-filter />
 
-        {{-- PRODUCT GRID --}}
+        {{-- Product Grid --}}
         <section class="mt-10 px-4">
             <div class="max-w-6xl mx-auto bg-white/70 backdrop-blur-sm rounded-lg shadow-sm border border-pink-200 p-6">
 

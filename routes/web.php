@@ -39,22 +39,23 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register')
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Products (public)
+// Product list
 Route::get('/products', [PublicProductController::class, 'index'])->name('products.index');
+
+// Auto-suggest (must be BEFORE /products/{product})
+Route::get('/products/suggest', [PublicProductController::class, 'suggest'])
+    ->name('products.suggest');
+
+// Product detail
 Route::get('/products/{product}', function (Product $product) {
     return view('products.show', ['product' => $product]);
 })->name('products.show');
 
-// Reviews (public)
+// Public reviews
 Route::get('/reviews', [UserReviewController::class, 'index'])->name('reviews.index');
 
 // Contact
 Route::view('/contact', 'stub')->name('contact');
-
-// Product suggestions (AJAX)
-Route::get('/products/suggest', [PublicProductController::class, 'suggest'])
-    ->name('products.suggest');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -71,7 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/account/orders', [AccountController::class, 'orders'])->name('account.orders');
     Route::get('/account/orders/{order}', [AccountController::class, 'showOrder'])->name('account.orders.show');
 
-    // Reviews (user creates)
+    // User reviews
     Route::get('/reviews/create/{order}', [UserReviewController::class, 'create'])->name('reviews.create');
     Route::post('/reviews', [UserReviewController::class, 'store'])->name('reviews.store');
 
