@@ -1,6 +1,5 @@
 <x-layout :title="'Browse Our Sweets'">
 
-    {{-- Alpine wrapper MUST wrap the filter component --}}
     <div x-data="{
         search: '',
         suggestions: [],
@@ -16,9 +15,10 @@
                 .then(data => this.suggestions = data);
         },
 
-        selectSuggestion(name) {
+        selectSuggestion(name, event) {
             this.search = name;
             this.suggestions = [];
+            event.target.closest('form').submit();
         }
     }">
 
@@ -30,7 +30,7 @@
             </p>
         </section>
 
-        {{-- 🔥 Your search + sort bar MUST be inside this wrapper --}}
+        {{-- Filter bar (contains the ONLY search + suggestions) --}}
         <x-product-filter />
 
         {{-- Product Grid --}}
@@ -50,6 +50,6 @@
             </div>
         </section>
 
-    </div> {{-- END Alpine wrapper --}}
+    </div>
 
 </x-layout>

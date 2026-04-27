@@ -13,6 +13,10 @@ class ProductController extends Controller
     {
         $query = Product::with('images');
 
+        if (request('search')) {
+            $query->where('name', 'like', '%' . request('search') . '%');
+        }
+
         switch (request('sort')) {
             case 'price_asc':
                 $query->orderBy('price', 'asc');
@@ -36,7 +40,7 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
-    // 🔥 Auto-suggest endpoint
+    // Auto-suggest endpoint
     public function suggest(Request $request)
     {
         $search = $request->get('q', '');
