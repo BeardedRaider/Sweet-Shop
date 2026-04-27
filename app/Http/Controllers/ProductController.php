@@ -18,10 +18,32 @@ class ProductController extends Controller
     // Show all products
     public function index()
     {
-        // Eager-load images so each product has its images available
-        $products = Product::with('images')->get();
+        $query = Product::with('images');
+
+        // Sorting logic
+        switch (request('sort')) {
+            case 'price_asc':
+                $query->orderBy('price', 'asc');
+                break;
+
+            case 'price_desc':
+                $query->orderBy('price', 'desc');
+                break;
+
+            case 'name_asc':
+                $query->orderBy('name', 'asc');
+                break;
+
+            case 'name_desc':
+                $query->orderBy('name', 'desc');
+                break;
+        }
+
+        $products = $query->get();
+
         return view('products.index', compact('products'));
     }
+
 
     // Show create form
     public function create()

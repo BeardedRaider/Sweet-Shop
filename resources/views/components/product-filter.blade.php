@@ -10,7 +10,7 @@
         {{-- Right: Search + Sort --}}
         <div class="flex flex-col sm:flex-row gap-4">
 
-            {{-- Search --}}
+            {{-- Search (we will wire this later) --}}
             <div class="relative">
                 <input 
                     type="text"
@@ -35,18 +35,20 @@
                 </div>
             </div>
 
-            {{-- Sort Dropdown --}}
-            <select 
-                class="px-4 py-2 rounded-full border border-pink-300 bg-white shadow-sm focus:ring-2 focus:ring-pink-400 focus:outline-none"
-                x-model="sort"
-                @change="applySort"
-            >
-                <option value="">Sort By</option>
-                <option value="price_asc">Price: Low → High</option>
-                <option value="price_desc">Price: High → Low</option>
-                <option value="name_asc">Name: A → Z</option>
-                <option value="name_desc">Name: Z → A</option>
-            </select>
+            {{-- Sort Dropdown (REAL FORM) --}}
+            <form method="GET" action="{{ route('products.index') }}">
+                <select 
+                    name="sort"
+                    class="px-4 py-2 rounded-full border border-pink-300 bg-white shadow-sm focus:ring-2 focus:ring-pink-400 focus:outline-none"
+                    onchange="this.form.submit()"
+                >
+                    <option value="">Sort By</option>
+                    <option value="price_asc"  {{ request('sort') === 'price_asc'  ? 'selected' : '' }}>Price: Low → High</option>
+                    <option value="price_desc" {{ request('sort') === 'price_desc' ? 'selected' : '' }}>Price: High → Low</option>
+                    <option value="name_asc"   {{ request('sort') === 'name_asc'   ? 'selected' : '' }}>Name: A → Z</option>
+                    <option value="name_desc"  {{ request('sort') === 'name_desc'  ? 'selected' : '' }}>Name: Z → A</option>
+                </select>
+            </form>
 
         </div>
     </div>
