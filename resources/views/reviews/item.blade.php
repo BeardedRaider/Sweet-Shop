@@ -1,33 +1,33 @@
-<div class="bg-white rounded-lg shadow-sm p-3 hover:shadow-md transition-shadow text-center w-full">
+<div class="bg-white rounded-xl shadow-md border border-pink-200 p-5 w-full max-w-xs
+            transition-all duration-300 hover:shadow-pink-300 hover:shadow-lg hover:-translate-y-1">
+
     {{-- Product image --}}
-    @if($review->product && $review->product->images->isNotEmpty())
-        <img src="{{ asset('storage/' . $review->product->images->first()->path) }}" 
-             alt="{{ $review->product->name }}" 
-             class="w-full h-48 object-cover rounded mb-2 mx-auto">
-    @else
-        <div class="w-full h-48 bg-gray-200 flex items-center justify-center rounded mb-2 mx-auto">
-            <span class="text-gray-500 text-xs">No image</span>
-        </div>
-    @endif
+    <div class="w-full h-48 overflow-hidden rounded-lg shadow-sm mb-3">
+        @if($review->product && $review->product->images->isNotEmpty())
+            <img src="{{ asset('storage/' . $review->product->images->first()->path) }}"
+                 alt="{{ $review->product->name }}"
+                 class="w-full h-full object-cover transform hover:scale-105 transition duration-300 ease-in-out">
+        @else
+            <div class="w-full h-full bg-gray-200 flex items-center justify-center rounded-lg">
+                <span class="text-gray-500 text-xs">No image</span>
+            </div>
+        @endif
+    </div>
 
     {{-- Product name --}}
-    <h3 class="text-sm font-semibold text-pink-700 mb-1">{{ $review->product->name }}</h3>
+    <h3 class="text-xl font-bold text-pink-700 tracking-tight mb-1">
+        {{ $review->product->name }}
+    </h3>
 
-    {{-- Review title --}}
+    {{-- Review title (optional) --}}
     @if(!empty($review->title))
-        <p class="text-xs font-medium text-gray-800 mb-1">"{{ $review->title }}"</p>
+        <p class="text-sm font-medium text-pink-900/80 mb-2">
+            “{{ $review->title }}”
+        </p>
     @endif
 
-    {{-- used to debug rating type --}}
-    {{-- 
-    <p class="text-xs text-red-500">Rating: {{ $review->rating }} ({{ gettype($review->rating) }})</p> --}}
-
     {{-- Star rating --}}
-    <div>
-        {{-- {{-- Testing the raiting display --}}
-        {{-- Rating: {{ $review->rating }}
-        <br> --}}
-        Stars:
+    <div class="text-yellow-500 text-lg mb-3">
         @for ($i = 1; $i <= 5; $i++)
             @if ($i <= (int) $review->rating)
                 ★
@@ -37,13 +37,14 @@
         @endfor
     </div>
 
-
     {{-- Review body --}}
-    <p class="text-gray-700 italic text-xs">“{{ $review->body }}”</p>
+    <p class="text-pink-900/90 text-sm italic mb-4">
+        “{{ $review->body }}”
+    </p>
 
-    {{-- Reviewer name --}}
-    <p class="mt-1 text-xs text-gray-500">— {{ $review->user->name ?? 'Anonymous' }}</p>
-
-    {{-- Review date --}}
-    <p class="text-xs text-gray-400">{{ $review->created_at->format('d M Y') }}</p>
+    {{-- Reviewer + Date --}}
+    <div class="flex justify-between text-xs text-pink-700">
+        <span>— {{ $review->user->name ?? 'Anonymous' }}</span>
+        <span>{{ $review->created_at->format('d M Y') }}</span>
+    </div>
 </div>

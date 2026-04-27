@@ -72,7 +72,7 @@
             </div>
 
             <div class="mt-8">
-                {{ $reviews->links() }}
+                {{ $reviews->links('vendor.pagination.sweetshop') }}
             </div>
         @else
             <p class="text-center text-gray-600">No reviews yet.</p>

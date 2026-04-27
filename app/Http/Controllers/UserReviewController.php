@@ -22,7 +22,7 @@ class UserReviewController extends Controller
             $query->where('product_id', $request->product_id);
         }
 
-        $reviews = $query->latest()->paginate(10)->withQueryString();
+        $reviews = $query->latest()->paginate(9)->withQueryString();
 
         return view('reviews.index', compact('reviews'));
     }
