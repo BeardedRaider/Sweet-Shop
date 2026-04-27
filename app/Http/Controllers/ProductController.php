@@ -44,7 +44,6 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
-
     // Show create form
     public function create()
     {
@@ -114,6 +113,22 @@ class ProductController extends Controller
 
         return redirect()->route('admin.products.index')
                          ->with('success', 'Product updated successfully.');
+    }
+
+    // search suggestions for AJAX
+    public function suggest(Request $request)
+    {
+        $search = $request->get('q', '');
+
+        if (strlen($search) < 2) {
+            return response()->json([]);
+        }
+
+        $results = Product::where('name', 'like', "%{$search}%")
+            ->limit(5)
+            ->pluck('name');
+
+        return response()->json($results);
     }
 }
 

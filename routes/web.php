@@ -51,6 +51,11 @@ Route::get('/reviews', [UserReviewController::class, 'index'])->name('reviews.in
 // Contact
 Route::view('/contact', 'stub')->name('contact');
 
+// Product suggestions (AJAX)
+Route::get('/products/suggest', [PublicProductController::class, 'suggest'])
+    ->name('products.suggest');
+
+
 /*
 |--------------------------------------------------------------------------
 | User Account (Auth Required)
