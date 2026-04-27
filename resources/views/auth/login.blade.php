@@ -1,5 +1,5 @@
 <x-layout :title="'Login or Register'">
-    <section class="max-w-md mx-auto bg-white shadow rounded p-6 mt-10">
+    <section class="max-w-md mx-auto bg-white shadow rounded p-6">
 
         {{-- Tabs --}}
         <div class="flex justify-between mb-6 border-b pb-2">

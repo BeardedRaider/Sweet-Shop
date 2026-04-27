@@ -1,48 +1,40 @@
 <footer class="bg-pink-50 border-t mt-10">
-    <div class="max-w-7xl mx-auto px-4 py-8 text-center text-sm text-pink-700">
+    {{-- Container: smaller padding for a thinner, cleaner footer --}}
+    <div class="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-pink-700">
 
-        {{-- Newsletter first --}}
-        <div class="mb-6">
+        {{-- Newsletter --}}
+        <div class="mb-4">
             <p class="text-pink-700 font-medium">Subscribe for sweet updates 🍬</p>
-            <form class="mt-2 flex justify-center items-center gap-4">
+
+            <form class="mt-2 flex justify-center items-center gap-3">
                 <input type="email" placeholder="Your email"
-                       class="px-3 py-2 border border-pink-300 rounded-lg focus:outline-none focus:ring focus:ring-pink-200">
+                       class="px-3 py-1.5 border border-pink-300 rounded-lg focus:outline-none focus:ring focus:ring-pink-200 text-sm">
                 <button type="submit"
-                        class="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition">
+                        class="px-4 py-1.5 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition text-sm">
                     Join
                 </button>
             </form>
         </div>
 
-        {{-- Divider for clarity, removed as i feel it cluters the footer --}}
-        {{-- <hr class="border-pink-200 my-8"> --}}
-
         {{-- Core info --}}
-        <p>&copy; {{ date('Y') }} SweetShop. Made with 💖 and sugar.</p>
+        <p class="text-pink-700">&copy; {{ date('Y') }} SweetShop. Made with 💖 and sugar.</p>
 
-        <p class="mt-2 space-x-2">
+        {{-- Legal links --}}
+        <p class="mt-2 space-x-3">
             <a href="/privacy" class="hover:text-pink-500 transition">Privacy Policy</a>
-            <span>|</span>
+            <span class="text-pink-400">•</span>
             <a href="/terms" class="hover:text-pink-500 transition">Terms of Service</a>
         </p>
-
-        {{-- Navigation links --}}
-        <nav class="mt-4 space-x-4">
+        
+        {{-- Navigation --}}
+        <nav class="mt-3 space-x-3">
             <a href="{{ route('home') }}" class="hover:text-pink-500 transition">Home</a>
-            <span>|</span>
+            <span class="text-pink-400">•</span>
             <a href="{{ route('products.index') }}" class="hover:text-pink-500 transition">Products</a>
-            <span>|</span>
+            <span class="text-pink-400">•</span>
             <a href="{{ route('reviews.index') }}" class="hover:text-pink-500 transition">Reviews</a>
-            <span>|</span>
+            <span class="text-pink-400">•</span>
             <a href="{{ route('contact') }}" class="hover:text-pink-500 transition">Contact</a>
         </nav>
-
-        {{-- Decorative emojis --}}
-        <div class="mt-6 flex justify-center gap-4 text-xl">
-            <span>🐱</span>
-            <span>🍩</span>
-            <span>🍓</span>
-            <span>🧁</span>
-        </div>
     </div>
 </footer>
