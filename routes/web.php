@@ -17,6 +17,8 @@ use App\Http\Controllers\Admin\AdminOrderController;
 // Public
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController as PublicProductController; // Shop products
+use App\Http\Controllers\ContactController;
+
 use App\Http\Controllers\UserReviewController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CartController;
@@ -58,7 +60,12 @@ Route::get('/reviews', [UserReviewController::class, 'index'])->name('reviews.in
 Route::get('/reviews/{review}', [UserReviewController::class, 'show'])->name('reviews.show');
 
 // Contact
-Route::view('/contact', 'stub')->name('contact');
+Route::get('/contact', function () {
+    return view('contact.contact');
+})->name('contact');
+
+Route::post('/contact', [ContactController::class, 'submit'])
+    ->name('contact.submit');
 
 /*
 |--------------------------------------------------------------------------
