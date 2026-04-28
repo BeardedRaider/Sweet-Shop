@@ -27,6 +27,13 @@ class UserReviewController extends Controller
         return view('reviews.index', compact('reviews'));
     }
 
+    // Public review detail
+    public function show(Review $review)
+    {
+        return view('reviews.show', compact('review'));
+    }
+
+
     // Show create form for a given order
     public function create(Order $order)
     {

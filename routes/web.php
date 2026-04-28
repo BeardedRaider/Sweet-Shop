@@ -54,6 +54,9 @@ Route::get('/products/{product}', function (Product $product) {
 // Public reviews
 Route::get('/reviews', [UserReviewController::class, 'index'])->name('reviews.index');
 
+// Review detail
+Route::get('/reviews/{review}', [UserReviewController::class, 'show'])->name('reviews.show');
+
 // Contact
 Route::view('/contact', 'stub')->name('contact');
 
