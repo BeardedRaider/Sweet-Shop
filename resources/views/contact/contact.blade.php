@@ -102,7 +102,7 @@
                 <label class="block text-sm font-semibold text-pink-700">Message</label>
                 <textarea name="message" required
                     class="w-full mt-1 rounded-xl border-2 border-pink-300 bg-pink-50/50 px-2
-                    focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition shadow-sm
+                    focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition-all duration-200 ease-out  shadow-sm
                     min-h-16 resize-none">
                 </textarea>
             </div>
@@ -132,9 +132,14 @@ document.addEventListener("input", function (e) {
     if (e.target.tagName.toLowerCase() !== "textarea") return;
 
     e.target.style.height = "auto";
-    e.target.style.height = (e.target.scrollHeight) + "px";
+
+    // Allow the browser to recalc height before animating
+    requestAnimationFrame(() => {
+        e.target.style.height = e.target.scrollHeight + "px";
+    });
 });
 </script>
+
 
 
 </x-layout>
