@@ -20,26 +20,30 @@
 
 <body x-data="{ open: false, content: '' }" class="text-slate-900 bg-[#FFE4C4]">
 
-    {{-- Global modal for product quick-view (AJAX-loaded content) --}}
+    {{-- Global modal for product & review quick-view --}}
     <div 
-        x-show="open"
-        x-transition.opacity
+        x-show="open" 
+        x-transition.opacity 
+        @click.self="open = false"
+        @keydown.escape.window="open = false"
         class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
     >
-        <div class="bg-white rounded-lg shadow-lg max-w-xl w-full p-6 relative">
-
+        <div 
+            class="bg-white rounded-lg shadow-lg max-w-xl w-full p-6 relative" 
+            @click.stop
+        >
             {{-- Close button --}}
-            <button 
-                @click="open = false" 
-                class="absolute top-3 right-3 text-pink-600 text-xl font-bold"
-            >
-                ×
-            </button>
+        <button 
+            @click="open = false" class="absolute top-3 right-3 text-pink-600 text-xl font-bold"
+        >
+            ×
+        </button>
 
             {{-- AJAX-loaded content --}}
             <div x-html="content"></div>
         </div>
     </div>
+
 
     <div class="min-h-screen flex flex-col">
         <x-header />
@@ -55,4 +59,5 @@
     </div>
 
 </body>
+
 </html>
