@@ -36,7 +36,7 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register')
 
 /*
 |--------------------------------------------------------------------------
-| Password Reset
+| Password Reset 
 |--------------------------------------------------------------------------
 |
 | These routes allow:
