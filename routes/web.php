@@ -36,6 +36,68 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register')
 
 /*
 |--------------------------------------------------------------------------
+| Password Reset
+|--------------------------------------------------------------------------
+|
+| These routes allow:
+| - Showing the "Forgot Password" page
+| - Sending the reset link email
+| - Showing the "Reset Password" form
+| - Updating the password
+|
+|--------------------------------------------------------------------------
+*/
+
+use Illuminate\Support\Facades\Password;
+use Illuminate\Http\Request;
+
+// Show "Forgot Password" page
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->middleware('guest')->name('password.request');
+
+// Send reset link email
+Route::post('/forgot-password', function (Request $request) {
+    $request->validate(['email' => 'required|email']);
+
+    $status = Password::sendResetLink(
+        $request->only('email')
+    );
+
+    return $status === Password::RESET_LINK_SENT
+        ? back()->with(['status' => __($status)])
+        : back()->withErrors(['email' => __($status)]);
+})->middleware('guest')->name('password.email');
+
+// Show "Reset Password" form (user clicked email link)
+Route::get('/reset-password/{token}', function ($token) {
+    return view('auth.reset-password', ['token' => $token]);
+})->middleware('guest')->name('password.reset');
+
+// Handle password update
+Route::post('/reset-password', function (Request $request) {
+    $request->validate([
+        'token' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|min:8|confirmed',
+    ]);
+
+    $status = Password::reset(
+        $request->only('email', 'password', 'password_confirmation', 'token'),
+        function ($user, $password) {
+            $user->forceFill([
+                'password' => bcrypt($password)
+            ])->save();
+        }
+    );
+
+    return $status === Password::PASSWORD_RESET
+        ? redirect()->route('login')->with('status', __($status))
+        : back()->withErrors(['email' => [__($status)]]);
+})->middleware('guest')->name('password.update');
+
+/*
+|--------------------------------------------------------------------------
 | Public Pages
 |--------------------------------------------------------------------------
 */
