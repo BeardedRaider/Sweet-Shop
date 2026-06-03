@@ -10,6 +10,10 @@
     <noscript>
         <link rel="stylesheet" href="/app.css">
     </noscript>
+    <style>
+    [x-cloak] { display: none !important; }
+    </style>
+
 </head>
 
 {{-- possible bg color options 
@@ -21,19 +25,20 @@
 <body x-data="{ open: false, content: '' }" class="text-slate-900 bg-[#FFE4C4]">
 
 {{-- Global modal for product & review quick-view --}}
-<div 
-    x-show="open"
-    x-transition.opacity
-    @click.self="open = false"
-    @keydown.escape.window="open = false"
-    x-trap="open"
-    x-init="
-        $watch('open', value => {
-            document.body.style.overflow = value ? 'hidden' : 'auto';
-        })
-    "
-    class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
->
+    <div 
+        x-cloak
+        x-show="open"
+        x-transition.opacity
+        @click.self="open = false"
+        @keydown.escape.window="open = false"
+        x-trap="open"
+        x-init="
+            $watch('open', value => {
+                document.body.style.overflow = value ? 'hidden' : 'auto';
+            })
+        "
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+    >
     <div 
         @click.stop
         class="bg-white rounded-xl shadow-xl max-w-xl w-full p-6 relative transform transition-all duration-300
